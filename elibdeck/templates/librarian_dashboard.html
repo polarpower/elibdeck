@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librarian Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ request.user.username }}</h1>
+    <p>Your PSRN: {{ psrn }}</p>
+    <a href="{% url 'add_book' %}">Add Book</a>
+    <a href="{% url 'search_books' %}">Search Books</a>
+    <a href="{% url 'leave' %}">Logout</a>
+    <a href="{% url 'borrowed_books' %}">Issued Books</a>
+</body>
+</html>

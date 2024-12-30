@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Borrowed Books</h1>
+
+{% for student_entry in students_with_borrowed_books %}
+<div class="student">
+    <h2>{{ student_entry.student.user.username }} (Room: {{ student_entry.student.room }})</h2>
+    {% if student_entry.borrow_records %}
+    <ul>
+        {% for record in student_entry.borrow_records %}
+        <li>{{ record.book.title }} - Issued on: {{ record.borrow_date }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No books currently borrowed.</p>
+    {% endif %}
+</div>
+{% endfor %}
+
+{% endblock %}

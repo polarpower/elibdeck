@@ -1,0 +1,8 @@
+<h2>Return Book Confirmation</h2>
+<p>You have returned: {{ book.title }}</p>
+{% if late_fee > 0 %}
+<p>Late Fee: ${{ late_fee }}</p>
+{% else %}
+<p>No late fee. Thank you for returning the book on time!</p>
+{% endif %}
+<a href="{% url 'student_dashboard' %}">Back to Dashboard</a>
