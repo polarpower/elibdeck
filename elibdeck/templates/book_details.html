@@ -1,0 +1,35 @@
+{% if user.is_authenticated %}
+  <h3>Average Rating: {{ book.average_rating }} ({{ book.rating_count }} ratings)</h3>
+
+  {% if user.studentprofile %}
+    {% if has_borrowed %}
+      <h4>Rate this Book:</h4>
+      <form method="post">
+        {% csrf_token %}
+        <label for="rating">Your Rating (1-5):</label>
+        <input type="number" name="rating" id="rating" min="1" max="5" required>
+        <button type="submit">Submit Rating</button>
+      </form>
+    {% else %}
+      <p>You can only rate this book if you have borrowed it.</p>
+    {% endif %}
+
+    <h2>{{ book.title }}</h2>
+    <p>Average Rating: {{ book.get_average_rating }}</p>
+    <p>Total Ratings: {{ book.get_rating_count }}</p>
+    <p>{{ book.author }} - {{ book.publisher }} - ISBN: {{ book.isbn }}</p>
+    <img src="{{ book.cover_image.url }}" alt="Book Cover" width="100">
+    <p>Total Copies: {{ book.total_copies }} | Available Copies: {{ book.available_copies }}</p>
+    <a href="{% url 'borrow_book' book.pk %}">Borrow this book</a>
+
+  {% endif %}
+
+  {% if is_librarian %}
+    <h3>Edit Book Details</h3>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Update</button>
+    </form>
+  {% endif %}
+{% endif %}

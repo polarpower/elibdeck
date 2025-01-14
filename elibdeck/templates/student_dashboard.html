@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ profile.user.username }}</h1>
+    <p>Room: {{ profile.room }}</p>
+    <p>Hostel: {{ profile.hostel }}</p>
+    <h3>Upcoming Return Dates:</h3>
+    <ul>
+        {% for record in borrow_records %}
+        {% if not record.return_date %}
+        <li>
+            {{ record.book.title }} - Return by: {{ record.due_date }}
+            <a href="{% url 'return_book' pk=record.pk %}">Return Book</a>
+        </li>
+        {% endif %}
+        {% empty %}
+        <li>No books due for return.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'search_books' %}">Search Books</a>
+    <a href="{% url 'submit_feedback' %}">Submit a Complaint</a>
+    <a href="{% url 'student_history' %}">Issuing history</a>
+    <a href="{% url 'account_logout' %}">Logout</a>
+</body>
+</html>

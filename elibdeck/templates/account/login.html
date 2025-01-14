@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load socialaccount %}
+
+{% block content %}
+<h2>Librarian Login</h2>
+<form method="post" action="{% url 'librarian_login' %}">
+    {% csrf_token %}
+    {{ librarian_form.as_p }}
+    <button type="submit">Login</button>
+</form>
+<p>Don't have an account? <a href="{% url 'librarian_signup' %}">Sign up here</a>.</p>
+
+<hr>
+
+<h2>Student Login</h2>
+<a href="{% provider_login_url 'google' %}">Sign in with Google</a>
+{% endblock %}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Books</title>
+</head>
+<body>
+    <h1>Upload Books</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="excel_file">Upload Excel File:</label>
+        <input type="file" name="excel_file" id="excel_file" accept=".xlsx, .xls">
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Download Template</h2>
+    <a href="{% url 'download_template' %}">Download Excel Template</a>
+</body>
+</html>

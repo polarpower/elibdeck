@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issuing History</title>
+</head>
+<body>
+    <h1>Issuing History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Borrowed On</th>
+                <th>Return By</th>
+                <th>Returned On</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in borrow_records %}
+            <tr>
+                <td>{{ record.book.title }}</td>
+                <td>{{ record.borrow_date }}</td>
+                <td>{{ record.due_date }}</td>
+                <td>{% if record.return_date %}{{ record.return_date }}{% else %}Not Returned{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'student_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>
